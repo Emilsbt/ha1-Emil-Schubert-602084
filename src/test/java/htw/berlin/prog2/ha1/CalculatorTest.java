@@ -108,5 +108,43 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    // Roter Test 1 (Aufgabe 2)
+    @Test
+    @DisplayName("should remember the latest value after pressing C for the first time")
+    void testClearButton() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(7);
+
+        calc.pressClearKey(); //sollte sich die 3 merken
+
+        calc.pressDigitKey(0);
+
+        String expected = "3";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    // Roter Test 2 (Aufgabe 2)
+    @Test
+    @DisplayName("nothing happens when the equal button is pressed without operation")
+    void testMissingOperationEqual() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+
+        calc.pressEqualsKey();
+
+        String expected = "3";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+
 }
 
