@@ -121,7 +121,7 @@ class CalculatorTest {
 
         calc.pressClearKey(); //sollte sich die 3 merken
 
-        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
 
         String expected = "3";
         String actual = calc.readScreen();
@@ -132,14 +132,17 @@ class CalculatorTest {
     // Roter Test 2 (Aufgabe 2)
     @Test
     @DisplayName("nothing happens when the equal button is pressed without operation")
-    void testMissingOperationEqual() {
+    void testMissingOperationEquals() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(3);
+        calc.pressDigitKey(3);
+
+
 
         calc.pressEqualsKey();
 
-        String expected = "3";
+        String expected = "33";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);

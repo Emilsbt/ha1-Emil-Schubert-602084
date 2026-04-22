@@ -45,9 +45,20 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+
+        // Bugfix Clear Taste
+        if (screen.equals("0")) {
+            latestOperation = "";
+            latestValue = 0;
+        } else {
+            screen = "0";
+        }
+
+
+        // vorheriger Code:
+        // screen = "0";
+        // latestOperation = "";
+        // latestValue = 0.0;
     }
 
     /**
@@ -118,11 +129,13 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
     public void pressEqualsKey() {
+
         var result = switch(latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
             case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
+            case "" -> Double.parseDouble(screen); //Bugfix: Zeigt screen, wenn latestOperation leer ist
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
